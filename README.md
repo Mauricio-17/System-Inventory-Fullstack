@@ -22,7 +22,7 @@ También se utilizó herramientas como JIB Maven Plugin y Maven Profiles para au
 
 
 ### Enlace del backend desplegado en AWS
-http://inventorysys-env.eba-ssmqzcvt.sa-east-1.elasticbeanstalk.com/
+http://inventoryenv-env.eba-84kbnycs.sa-east-1.elasticbeanstalk.com
 
 #### Integration Testing incluida a las APIs de la entidad "Brand" como muestra.
 
