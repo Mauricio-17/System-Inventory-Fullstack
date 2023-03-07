@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+env:
+  MYSQL_DATABASE: inventory
+  MYSQL_PASSWORD: 1q2w3e4r5t
+  JAVA_VERSION: 1.17
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+        ports:
+          - 3306:3306
+        # options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1.4.3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Maven Clean Package
+        run: |
+          ./mvnw --no-transfer-progress clean package -P build-frontend
